@@ -1,8 +1,10 @@
 require 'simplecov'
+require 'coveralls'
 require 'rake'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-  SimpleCov::Formatter::HTMLFormatter
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
 ])
 
 SimpleCov.start 'rails' do

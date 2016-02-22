@@ -5,6 +5,7 @@ ruby "2.3.0"
 gem 'rails', '4.2.5.1'
 
 gem 'bcrypt'
+gem 'figaro'
 gem 'rspec_api_documentation'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'

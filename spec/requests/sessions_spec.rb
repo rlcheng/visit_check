@@ -12,7 +12,7 @@ describe "sessions", type: :request do
   it "should create a session" do
     post '/log_in', params
     expect(response.code).to eq("302")
-    expect(response).to redirect_to(root_path)
+    expect(response).to redirect_to(apps_path)
     expect(session[:user_id]).to_not be_nil
   end
 

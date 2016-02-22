@@ -1,0 +1,30 @@
+<%= form_for @app do |a| %>
+	<% if @app.errors.any? %>
+		<div id="error_explanation">
+			<h2>
+				<%= pluralize(@app.errors.count, "error") %>
+				stopped this app from being saved:
+			</h2>
+			<ul>
+				<% @app.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<p>
+		<%= a.label :name %><br>
+		<%= a.text_field :name %>
+	</p>
+
+	<p>
+		<%= a.label :resource_url %><br>
+		<%= a.text_area :resource_url %>
+	</p>
+
+	<p>
+		<%= a.submit %>
+	</p>
+
+<% end %>
