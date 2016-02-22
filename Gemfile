@@ -13,10 +13,10 @@ gem 'turbolinks'
 
 group :development, :test do
   gem 'byebug'
-  gem 'coveralls', :require => false
+  gem 'coveralls', require: false
   gem 'factory_girl_rails'
   gem 'rspec-rails'
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
   gem 'sqlite3'
   gem 'spring'
 end
