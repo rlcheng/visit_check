@@ -7,13 +7,6 @@ describe 'apps', type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:user_params) { { email: user.email, password: user.password } }
 
-  context "when logged out" do
-    it "should not allow access to visits index" do
-      post '/visits'
-      expect(response).to redirect_to '/log_in'
-    end
-  end
-
   context "when logged in" do
     before do
       post '/log_in', user_params
@@ -23,14 +16,14 @@ describe 'apps', type: :request do
     describe "Post create /visits" do
       it "should create a new visit" do
         expect{
-          post '/visits', visit_params
+          post '/users/1/visits', visit_params
         }.to change(Visit, :count).by(1)
       end
 
       it "should update instead of create if visit_params exists" do
-        post '/visits', visit_params
+        post '/users/1/visits', visit_params
         expect{
-          post '/visits', update_visit_params
+          post '/users/1/visits', update_visit_params
         }.to change(Visit, :count).by(0) 
         expect(Visit.last.time).to eq(update_visit_params[:visit][:time])
       end
@@ -38,9 +31,9 @@ describe 'apps', type: :request do
 
     describe "visits index page" do
       it "should render the visits index page" do
-        post '/visits', visit_params
-        post '/visits', visit_params2
-        get '/visits'
+        post '/users/1/visits', visit_params
+        post '/users/1/visits', visit_params2
+        get '/users/1/visits'
         expect(response).to have_http_status(200)
         expect(response).to render_template('index')
       end
@@ -48,12 +41,12 @@ describe 'apps', type: :request do
 
     describe "Destroy /visit/1" do
       it "should destroy all visits" do
-        post '/visits', visit_params
-        post '/visits', visit_params2
+        post '/users/1/visits', visit_params
+        post '/users/1/visits', visit_params2
         expect{
-          delete '/visits/2'
+          delete '/users/1/visits/2'
         }.to change(Visit, :count).by(-1)
-        expect(response).to redirect_to visits_path
+        expect(response).to redirect_to user_visits_path
       end
     end
   end

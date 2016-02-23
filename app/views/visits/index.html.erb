@@ -9,7 +9,7 @@
     <tr>
       <td><%= visit.name %></td>
       <td><%= visit.time %></td>
-      <td><%= link_to 'Destroy', visit_path(visit), method: :delete,
+      <td><%= link_to 'Destroy', [visit.user, visit], method: :delete,
               data: { confirm: 'Are you sure?' } %>
       </td>
     </tr>

@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 
   root :to => "users#new"
 
-  resources :users
+  resources :users do
+    resources :visits
+  end
   resources :sessions
   resources :apps
-  resources :visits
 end
