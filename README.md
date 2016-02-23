@@ -12,6 +12,7 @@ Make sure you have the correct Ruby version. Check .ruby-version at root of the 
 bundle install
 rake db:create
 rake db:migrate
+rake db:seed
 rails s
 ```
 
@@ -45,6 +46,8 @@ This is the 'apps_users' table described in the requirements. I changed the name
 
 There is an association between the Visit model and User model. User has many Visits and Visit belongs to User. This is so that results for each user will be isolated and recorded individually.
 
+This model has a name and time for each app. Time is recorded as float because anything timing related generally wont be whole integers and I assume time data returned by cache timing is in milliseconds.
+
 There are only 3 actions: create, index, and destroy. I figure there's no need for anyone to edit the data manually. Destroy is there so that if the user sees the list and doesn't want something on the list, he/she can choose to destroy it. 
 
 The create action however is both create and update. I wanted to create a table such that when a user decides to figure out what sites were visited, he/she may do that multiple times and if so we don't always need to create a new entry. So the create action first sees if it can find parameter and if it can't it will create it. Otherwise it will update what's already in the table. I used `count` as a way to see if first_or_create method created or not.
@@ -53,6 +56,9 @@ Another way to look at this is, if the `apps` table is not updated, the create a
 
 ###Work still to be done
 I need to take Michal Zalewski's Chrome code here http://lcamtuf.coredump.cx/cachetime/chrome.html and make changes. So instead of the URLs he has I'll need to interface my `apps` table into his javascript. Also, once cache timing is performed instead of outputing it direct I need to interface with the `visits` table and write into it, and then display from the table. Still plenty more work to be done but I feel that the rails app is basically ready for it all. 
+
+###Seed file
+The `seeds.rb` file loads the initial apps and their resource urls(I viewed source of each app to grab the url). It will also create an user and load dummy data on apps the user had visited sorted by cache time. You can log in as that user using email: user@user.com and password: password. To see the list of visits go to this url: http://localhost:3000/users/1/visits
 
 ###Order of Operation if it were all working
 Just like the flow of the Code Challenge document:
@@ -79,4 +85,4 @@ I included a few badges at the top of this Readme just so that you can quickly s
 
 I purposely tried to keep things simple. Gitflow workflow to try to make the commits tell a story. I followed the Github Ruby style guide as much as possible. And finally I kept the testing as simple as possible, no Capybara mainly so that I can understand routing better.
 
-I had a lot of fun building this project. Thank you for your time.
+I had a lot of fun building this code challenge. Thank you for your time.
