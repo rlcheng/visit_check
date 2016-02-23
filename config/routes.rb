@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :apps
+  resources :visits
 end
